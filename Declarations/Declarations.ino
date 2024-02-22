@@ -108,7 +108,7 @@ void initialize_pins()
 
 void write_to_lcd(String text)
 {
-  ucg.setRotate90();
+  ucg.setRotate270();
   ucg.setFont(ucg_font_ncenR14_tr);
   ucg.setPrintPos(25,25);
   ucg.setColor(255, 255, 255);
