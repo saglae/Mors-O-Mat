@@ -16,15 +16,15 @@ void test_tone(int frequency, int pin);
 
 //Pins
 
-#define cs   9
-#define dc   8
-#define rst  7
-#define sclk 13
-#define mosi 11
-#define miso 12
+#define lcd_sck 13
+#define lcd_sdi 11
+#define lcd_cs 10
+#define lcd_reset 9
+#define lcd_dc 8
+//LED an 3V3 (17) und VCC an 5V (27)
 
 
-Ucglib_ILI9341_18x240x320_HWSPI ucg(dc, cs, rst);
+Ucglib_ILI9341_18x240x320_HWSPI ucg(lcd_dc, lcd_cs, lcd_reset);
 
 //***************************** Setup **************************************
 

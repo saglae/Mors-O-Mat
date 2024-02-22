@@ -1,38 +1,18 @@
 #include <SPI.h>
 #include "Ucglib.h"
+#include "Parameters.h"
+#include "Display_Functions.h"
+#include "Buzzer_Functions.h"
+#include "Alphabet.h"
 
-
-#define modus_1 5
-#define modus_2 4
-#define modus_3 3
-#define modus_4 2
-
-#define led_beat 7
-#define buzzer 6
-#define buzzer_old A7
-
-#define lcd_sck 13
-#define lcd_sdi 11
-#define lcd_cs 10
-#define lcd_reset 9
-#define lcd_dc 8
-//LED an 3V3 (17) und VCC an 5V (27)
-
-#define speed A0
-#define difficulty A1
-#define volume A2
-
-#define dot A4
-#define dash A5
-#define input_switch A3
 
 
 //Declarations
 void initialize_pins();
-void write_to_lcd(String);
 
 
-Ucglib_ILI9341_18x240x320_HWSPI ucg(lcd_dc, lcd_cs, lcd_reset);
+
+
 
 
 void setup() {
@@ -40,6 +20,7 @@ void setup() {
   initialize_pins();
   ucg.begin(UCG_FONT_MODE_TRANSPARENT);
   ucg.clearScreen();
+  
 
 }
 
@@ -60,9 +41,6 @@ void loop() {
   //playTone(buzzer,440,1000);
  
 
-  
-  
-  
 
 
 }
@@ -95,30 +73,9 @@ void initialize_pins()
   pinMode(input_switch,INPUT);
 }
 
-void write_to_lcd(String text)
-{
-  ucg.clearScreen();
-  ucg.setRotate270();
-  ucg.setFont(ucg_font_ncenR14_tr);
-  ucg.setPrintPos(25,25);
-  ucg.setColor(255, 255, 255);
-  ucg.print(text);
 
-  delay(2000);
-   
-}
 
-void playTone(int buzzerPin, int frequency, int duration) {  //duration in ms
-  int period = 1000 / frequency;  // Berechne die Periode des Tons in Mikrosekunden
-  long cycles = duration / period;  // Berechne die Anzahl der Zyklen
 
-  for (long i = 0; i < cycles; i++) {
-    digitalWrite(buzzerPin, HIGH);
-    delay(period / 2);
-    digitalWrite(buzzerPin, LOW);
-    delay(period / 2);
-  }
-}
 
 void checkMode()
 {
