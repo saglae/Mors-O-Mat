@@ -68,7 +68,7 @@ void loop() {
     write_to_lcd("Q-Schlüssel");
   }
 
-  //playTone();
+  //playTone(buzzer,440,1000);
   delay(1000);
 
   
@@ -118,23 +118,14 @@ void write_to_lcd(String text)
    
 }
 
-void playTone() {
-    //Frequenz 1
-    for (int i = 0; i <80; i++) 
-    {
-      digitalWrite (buzzer, HIGH) ;
-      delay (1) ;
-      digitalWrite (buzzer, LOW) ;
-      delay (1) ;
-    }
+void playTone(int buzzerPin, int frequency, int duration) {  //duration in ms
+  int period = 1000 / frequency;  // Berechne die Periode des Tons in Mikrosekunden
+  long cycles = duration / period;  // Berechne die Anzahl der Zyklen
 
-    delay(2000);
-    //Frequenz 2
-    for (int i = 0; i <100; i++) 
-    {
-      digitalWrite (buzzer, HIGH) ;
-      delay (2) ;
-      digitalWrite (buzzer, LOW) ;
-      delay (2) ;
-    }
+  for (long i = 0; i < cycles; i++) {
+    digitalWrite(buzzerPin, HIGH);
+    delay(period / 2);
+    digitalWrite(buzzerPin, LOW);
+    delay(period / 2);
+  }
 }
