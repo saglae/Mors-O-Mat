@@ -22,8 +22,8 @@
 #define difficulty A1
 #define volume A2
 
-#define dot A5
-#define dash A4
+#define dot A4
+#define dash A5
 #define input_switch A3
 
 
@@ -46,30 +46,19 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  //write_to_lcd("Test");
-  if(digitalRead(modus_1))
+  if(analogRead(dot)>900)
   {
-    ucg.clearScreen();
-    write_to_lcd("Buchstaben lernen");
+    //playTone(buzzer,440,200);
+    write_to_lcd(".");
   }
-  else if(digitalRead(modus_2))
+  if(analogRead(dash)>900)
   {
-    ucg.clearScreen();
-    write_to_lcd("Hörverstehen");
-  }
-  else if(digitalRead(modus_3))
-  {
-    ucg.clearScreen();
-    write_to_lcd("Wörter geben");
-  }
-  else if(digitalRead(modus_4))
-  {
-    ucg.clearScreen();
-    write_to_lcd("Q-Schlüssel");
+    //playTone(buzzer,440,600);
+    write_to_lcd("-");
   }
 
   //playTone(buzzer,440,1000);
-  delay(1000);
+ 
 
   
   
@@ -108,6 +97,7 @@ void initialize_pins()
 
 void write_to_lcd(String text)
 {
+  ucg.clearScreen();
   ucg.setRotate270();
   ucg.setFont(ucg_font_ncenR14_tr);
   ucg.setPrintPos(25,25);
@@ -127,5 +117,28 @@ void playTone(int buzzerPin, int frequency, int duration) {  //duration in ms
     delay(period / 2);
     digitalWrite(buzzerPin, LOW);
     delay(period / 2);
+  }
+}
+
+void checkMode()
+{
+
+  //write_to_lcd("Test");
+  if(digitalRead(modus_1))
+  {
+    
+    write_to_lcd("Buchstaben lernen");
+  }
+  else if(digitalRead(modus_2))
+  {
+    write_to_lcd("Hörverstehen");
+  }
+  else if(digitalRead(modus_3))
+  {
+    write_to_lcd("Wörter geben");
+  }
+  else if(digitalRead(modus_4))
+  {
+    write_to_lcd("Q-Schlüssel");
   }
 }
