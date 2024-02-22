@@ -13,8 +13,6 @@ void initialize_pins();
 
 
 
-
-
 void setup() {
   // put your setup code here, to run once:
   initialize_pins();
