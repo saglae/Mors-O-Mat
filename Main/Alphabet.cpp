@@ -2,49 +2,49 @@
 #include <Arduino.h>
 #include "Parameters.h"
 
-Letter::Letter(string structure, string definition)  //Konstruktor
+Letter::Letter(const char* structure, const char* definition)  //Konstruktor
 {
     this->structure = structure; 
     this->definition = definition;
 }
 
-A=Letter(".-","Alpha");
-B=Letter("-...","Bravo");
-C=Letter("-.-.","Charlie");
-D=Letter("-..","Delta");
-E=Letter(".","Echo");
-F=Letter("..-.","Foxtrott");
-G=Letter("--.","Golf");
-H=Letter("....","Hotel");
-I=Letter("..","India");
-J=Letter(".---","Juliett");
-K=Letter("-.-","Kilo");
-L=Letter(".-..","Lima");
-M=Letter("--","Mike");
-N=Letter("-.","November");
-O=Letter("---","Oscar");
-P=Letter(".--.","Papa");
-Q=Letter("--.-","Quebec");
-R=Letter(".-.","Romeo");
-S=Letter("...","Sierra");
-T=Letter("-","Tango");
-U=Letter("..-","Uniform");
-V=Letter("...-","Victor");
-W=Letter(".--","Whiskey");
-X=Letter("-..-","X-Ray");
-Y=Letter("-.--","Yankee");
-Z=Letter("--..","Zulu");
+Letter A_M(".-","Alpha");
+Letter B_M("-...","Bravo");
+Letter C_M("-.-.","Charlie");
+Letter D_M("-..","Delta");
+Letter E_M(".","Echo");
+Letter F_M("..-.","Foxtrott");
+Letter G_M("--.","Golf");
+Letter H_M("....","Hotel");
+Letter I_M("..","India");
+Letter J_M(".---","Juliett");
+Letter K_M("-.-","Kilo");
+Letter L_M(".-..","Lima");
+Letter M_M("--","Mike");
+Letter N_M("-.","November");
+Letter O_M("---","Oscar");
+Letter P_M(".--.","Papa");
+Letter Q_M("--.-","Quebec");
+Letter R_M(".-.","Romeo");
+Letter S_M("...","Sierra");
+Letter T_M("-","Tango");
+Letter U_M("..-","Uniform");
+Letter V_M("...-","Victor");
+Letter W_M(".--","Whiskey");
+Letter X_M("-..-","X-Ray");
+Letter Y_M("-.--","Yankee");
+Letter Z_M("--..","Zulu");
 
-1_M=Letter(".----","Eins");
-2_M=Letter("..---","Zwei");
-3_M=Letter("...--","Drei");
-4_M=Letter("....-","Vier");
-5_M=Letter(".....","Fünf");
-6_M=Letter("-....","Sechs");
-7_M=Letter("--...","Sieben");
-8_M=Letter("---..","Acht");
-9_M=Letter("----.","Neun");
-0_M=Letter("-----","Null");
+Letter M_1(".----","Eins");
+Letter M_2("..---","Zwei");
+Letter M_3("...--","Drei");
+Letter M_4("....-","Vier");
+Letter M_5(".....","Fünf");
+Letter M_6("-....","Sechs");
+Letter M_7("--...","Sieben");
+Letter M_8("---..","Acht");
+Letter M_9("----.","Neun");
+Letter M_0("-----","Null");
 
 
 //Quellen: https://www.marinecom.ch/e-learning/seefunk-alphabet/

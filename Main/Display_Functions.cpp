@@ -1,8 +1,8 @@
-#include "Display_Functions.h"
 #include <Arduino.h>
 #include "Ucglib.h"
 #include "Parameters.h"
-
+#include "Alphabet.h"
+#include "Display_Functions.h"
 
 Ucglib_ILI9341_18x240x320_HWSPI ucg(lcd_dc, lcd_cs, lcd_reset);
 
@@ -16,5 +16,9 @@ void write_to_lcd(String text)
   ucg.print(text);
 
   delay(2000);
-   
+}
+
+void show_letter(Letter x)
+{
+  write_to_lcd(x.definition);
 }
