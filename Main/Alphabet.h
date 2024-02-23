@@ -1,5 +1,5 @@
 #ifndef ALPHABET_H
-#define ALPHABET_FUNCTIONS_H
+#define ALPHABET_H
 
 #include <Arduino.h>
 #include "Parameters.h"
