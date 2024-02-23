@@ -6,19 +6,43 @@
 
 Ucglib_ILI9341_18x240x320_HWSPI ucg(lcd_dc, lcd_cs, lcd_reset);
 
-void write_to_lcd(String text)
+void write_to_lcd(const char* text, int row, bool clear=false)
 {
-  ucg.clearScreen();
-  ucg.setRotate270();
-  ucg.setFont(ucg_font_ncenR14_tr);
-  ucg.setPrintPos(25,25);
-  ucg.setColor(255, 255, 255);
+  lcd_home(clear);
+  lcd_setRow(row);
   ucg.print(text);
-
-  delay(2000);
 }
 
 void show_letter(Letter x)
 {
-  write_to_lcd(x.definition);
+  //lcd_home(true);
+  write_to_lcd(x.definition,1);
+  lcd_spreadStructure(x,2);
+  write_to_lcd(x.name,3);
+}
+
+void lcd_home(bool clear_display)
+{
+  ucg.setRotate270();
+  ucg.setFont(ucg_font_ncenR14_tr);
+  ucg.setPrintPos(25,25);
+  ucg.setColor(255, 255, 255);
+  if(clear_display)
+  {
+    ucg.clearScreen();
+  }
+}
+
+void lcd_setRow(int row)
+{
+  ucg.setPrintPos(25,25+row*40);
+}
+
+void lcd_spreadStructure(Letter x, int row)
+{
+  for(int index = 0; index < strlen(x.structure); index++)
+  {
+    ucg.setPrintPos(25+index*20,25+row*40);
+    ucg.print(x.structure[index]);
+  }
 }

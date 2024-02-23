@@ -6,8 +6,11 @@
 #include "Parameters.h"
 
 
-void write_to_lcd(String);
+void write_to_lcd(const char* text, int row, bool clear=false);
 void show_letter(Letter);
+void lcd_home(bool clear_display);
+void lcd_setRow(int row);
+void lcd_spreadStructure(Letter x, int row);
 
 extern Ucglib_ILI9341_18x240x320_HWSPI ucg;
 

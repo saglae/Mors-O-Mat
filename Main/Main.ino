@@ -1,9 +1,10 @@
 #include <SPI.h>
 #include "Ucglib.h"
 #include "Parameters.h"
+#include "Alphabet.h"
 #include "Display_Functions.h"
 #include "Buzzer_Functions.h"
-#include "Alphabet.h"
+
 
 
 
@@ -25,7 +26,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  if(analogRead(dot)>900)
+  /*if(analogRead(dot)>900)
   {
     //playTone(buzzer,440,200);
     write_to_lcd(".");
@@ -34,11 +35,12 @@ void loop() {
   {
     //playTone(buzzer,440,600);
     write_to_lcd("-");
-  }
+  }*/
 
   //playTone(buzzer,440,1000);
  
-
+  show_letter(Z_M);
+  delay(2000);
 
 
 }
@@ -82,18 +84,18 @@ void checkMode()
   if(digitalRead(modus_1))
   {
     
-    write_to_lcd("Buchstaben lernen");
+    write_to_lcd("Buchstaben lernen",1,true);
   }
   else if(digitalRead(modus_2))
   {
-    write_to_lcd("Hörverstehen");
+    write_to_lcd("Hörverstehen",1,true);
   }
   else if(digitalRead(modus_3))
   {
-    write_to_lcd("Wörter geben");
+    write_to_lcd("Wörter geben",1,true);
   }
   else if(digitalRead(modus_4))
   {
-    write_to_lcd("Q-Schlüssel");
+    write_to_lcd("Q-Schlüssel",1,true);
   }
 }
