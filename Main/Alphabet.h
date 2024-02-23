@@ -7,9 +7,10 @@
 class Letter 
 {
   public: 
-      Letter(const char* structure, const char* definition); //Konstruktor: Structure, Definition
+      Letter(const char* structure, const char* definition, const char* name); //Konstruktor: Structure, Definition
       const char* structure;
       const char* definition;
+      const char* name;
 };
 
 extern Letter A_M;
@@ -39,7 +40,15 @@ extern Letter X_M;
 extern Letter Y_M;
 extern Letter Z_M;
 
-
+extern Letter M_1;
+extern Letter M_2;
+extern Letter M_4;
+extern Letter M_5;
+extern Letter M_6;
+extern Letter M_7;
+extern Letter M_8;
+extern Letter M_9;
+extern Letter M_0;
 
 
 
