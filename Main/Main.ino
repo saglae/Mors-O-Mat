@@ -4,6 +4,7 @@
 #include "Alphabet.h"
 #include "Display_Functions.h"
 #include "Buzzer_Functions.h"
+#include "Input.h"
 
 
 
@@ -19,6 +20,7 @@ void setup() {
   initialize_pins();
   ucg.begin(UCG_FONT_MODE_TRANSPARENT);
   ucg.clearScreen();
+  //Serial.begin(9600);
   
 
 }
@@ -26,22 +28,14 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  /*if(analogRead(dot)>900)
-  {
-    //playTone(buzzer,440,200);
-    write_to_lcd(".");
-  }
-  if(analogRead(dash)>900)
-  {
-    //playTone(buzzer,440,600);
-    write_to_lcd("-");
-  }*/
+  get_settings();
 
-  //playTone(buzzer,440,1000);
- 
-  show_letter(Z_M);
-  delay(2000);
-
+  //show_settings();
+  //playLetter(A_M);
+  //playLetter(M_9);
+  //playLetter(B_M);
+  get_dit_action();
+  
 
 }
 
@@ -49,28 +43,18 @@ void loop() {
 //Definitions
 void initialize_pins()
 {
-  pinMode(modus_1,INPUT);
-  pinMode(modus_2,INPUT);
-  pinMode(modus_3,INPUT);
-  pinMode(modus_4,INPUT);
-
-  pinMode(led_beat,OUTPUT);
-  pinMode(buzzer,OUTPUT);
-  pinMode(buzzer_old, OUTPUT);
-
-  pinMode(lcd_sck,OUTPUT);
-  pinMode(lcd_sdi,OUTPUT);
-  pinMode(lcd_cs,OUTPUT);
-  pinMode(lcd_reset,OUTPUT);
-  pinMode(lcd_dc,OUTPUT);
-
-  pinMode(speed,INPUT);
-  pinMode(difficulty,INPUT);
-  pinMode(volume,INPUT);
-
-  pinMode(dot,INPUT);
-  pinMode(dash,INPUT);
-  pinMode(input_switch,INPUT);
+  int total_number_of_pins = get_total_amount_of_used_Pins();
+  for (int pin = 0; pin < total_number_of_pins; pin++)
+  {
+    if (Pins[pin].input)
+    {
+      pinMode(Pins[pin].pinName, INPUT);
+    }
+    else
+    {
+      pinMode(Pins[pin].pinName, OUTPUT);
+    }
+  }
 }
 
 

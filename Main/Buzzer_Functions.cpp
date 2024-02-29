@@ -29,11 +29,6 @@ void playLetter(Letter x)
   float dit = current_dit_duration; 
   int dah = dit * 3;
 
-  char buffer[20];
-  snprintf(buffer, sizeof(buffer), "Dit: %d", dit);
-  write_to_lcd(buffer,1,false);
-  //write_to_lcd(dah,3,false);
-
   for(int char_index = 0; char_index < sum_chars; char_index++)
   {
     if(x.structure[char_index] == '-')

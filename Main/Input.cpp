@@ -1,5 +1,9 @@
 #include "Input.h"
 
+int dit_pause_counter = 0;
+const char* current_input = "";
+
+
 int get_Value(int pin)
 {
   return analogRead(pin);
@@ -53,10 +57,6 @@ void get_settings()
                                                                   //     8             12           16              20             24         WPM entsprechend nach Paris Norm:  	
                                                               //    400dit/min      600dit/min    800dit/min    1000dit/min   1200dit/min
                                                               //     150ms/dit      100ms/dit     75ms/dit       60ms/dit       50ms/dit
-  //current_dit_duration = current_dit_duration * 1000.0;
-  char buffer[20];
-  snprintf(buffer, sizeof(buffer), "Current Dit:  %d", current_dit_duration);
-  write_to_lcd(buffer,7,false); 
   
   if(analogRead(input_switch)>500){
     paddle = true;
@@ -88,6 +88,65 @@ void show_settings()
 
   snprintf(output, sizeof(output), "Paddle:   %s", paddle ? "true" : "false");
   write_to_lcd(output,8,false);
+}
+
+int check_dits()
+{
+  //Return Values: 0: Pause; 1: Dit; 2: Dah
+  int output = 0;
+  if(analogRead(dot)>850)
+  {
+    output = 1;
+  }
+  else if(analogRead(dash)>850)
+  {
+    output = 2;
+  }
+  return output;
+}
+
+
+bool check_long_Pause()
+{
+  if(dit_pause_counter==3)
+  {
+    dit_pause_counter = 0;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+void get_dit_action()
+{
+  int action = check_dits();
+  bool wait = false;
+
+  if(action == 0)
+  { //Pause
+    dit_pause_counter++;
+    delay(current_dit_duration);
+    if(check_long_Pause());
+    {
+      //delay(current_dit_duration*2); // hat schon einmal!
+    }
+  }
+  else if(action == 1)
+  { // Dit
+    playTone(buzzer,440,current_dit_duration,current_volume_level);
+    //delay(current_dit_duration);
+    dit_pause_counter = 0;
+  }
+  else if(action == 2)
+  { //Dah
+    playTone(buzzer,440,current_dit_duration*3,current_volume_level);
+    //delay(current_dit_duration*3);
+    dit_pause_counter = 0;
+  }
+  delay(current_dit_duration);
+
 }
 
 
