@@ -50,6 +50,8 @@ extern Letter M_8;
 extern Letter M_9;
 extern Letter M_0;
 
+extern Letter all_Letters[];
+extern int total_letters;
 
 
 #endif

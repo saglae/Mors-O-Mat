@@ -16,7 +16,7 @@ void write_to_lcd(const char* text, int row, bool clear=false)
 void show_letter(Letter x)
 {
   write_to_lcd(x.definition,1);
-  lcd_spreadStructure(x,2);
+  lcd_spreadStructure(x.structure,2);
   write_to_lcd(x.name,3);
 }
 
@@ -38,11 +38,11 @@ void lcd_setRow(int row)
   ucg.setPrintPos(25,25+row*25);
 }
 
-void lcd_spreadStructure(Letter x, int row)
+void lcd_spreadStructure(const char* structure, int row)
 {
-  for(int index = 0; index < strlen(x.structure); index++)
+  for(int index = 0; index < strlen(structure); index++)
   {
     ucg.setPrintPos(25+index*20,25+row*25);
-    ucg.print(x.structure[index]);
+    ucg.print(structure[index]);
   }
 }

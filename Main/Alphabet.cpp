@@ -49,6 +49,11 @@ Letter M_8("---..","Acht","8");
 Letter M_9("----.","Neun","9");
 Letter M_0("-----","Null","0");
 
+Letter all_Letters[] = {A_M, B_M, C_M, D_M, E_M, F_M, G_M, H_M, I_M, J_M, K_M, 
+                        L_M, M_M, N_M, O_M, P_M, Q_M, R_M, S_M, T_M, U_M, V_M, 
+                        W_M, X_M, Y_M, Z_M, M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8, M_9, M_0};
+
+int total_letters = 36;
 
 //Quellen: https://www.marinecom.ch/e-learning/seefunk-alphabet/
 //Quellen: https://www.codebug.org.uk/learn/step/540/morse-code-alphabet/

@@ -1,7 +1,7 @@
 #include "Input.h"
 
 int dit_pause_counter = 0;
-const char* current_input = "";
+char* current_input_structure = "";
 
 
 int get_Value(int pin)
@@ -94,11 +94,11 @@ int check_dits()
 {
   //Return Values: 0: Pause; 1: Dit; 2: Dah
   int output = 0;
-  if(analogRead(dot)>850)
+  if(analogRead(dot)>500)
   {
     output = 1;
   }
-  else if(analogRead(dash)>850)
+  else if(analogRead(dash)>500)
   {
     output = 2;
   }
@@ -106,7 +106,7 @@ int check_dits()
 }
 
 
-bool check_long_Pause()
+bool check_long_Pause_letter()
 {
   if(dit_pause_counter==3)
   {
@@ -128,25 +128,119 @@ void get_dit_action()
   { //Pause
     dit_pause_counter++;
     delay(current_dit_duration);
-    if(check_long_Pause());
+    if(check_long_Pause_letter());
     {
-      //delay(current_dit_duration*2); // hat schon einmal!
+        append_Structure(';');
     }
   }
   else if(action == 1)
   { // Dit
     playTone(buzzer,440,current_dit_duration,current_volume_level);
-    //delay(current_dit_duration);
+    append_Structure('.');
     dit_pause_counter = 0;
   }
   else if(action == 2)
   { //Dah
     playTone(buzzer,440,current_dit_duration*3,current_volume_level);
-    //delay(current_dit_duration*3);
+    append_Structure('-');
     dit_pause_counter = 0;
   }
   delay(current_dit_duration);
 
 }
 
+void append_Structure(const char* toAppend) {
+    if (strlen(current_input_structure) + strlen(toAppend) >= 100) //Zu wenig Platz im Buffer
+    {
+      shift_Buffer_to_first_Semikolon();
+    }
+    strcat(current_input_structure, toAppend);
+}
+
+//Powered by ChatGPT
+void shift_Buffer_to_first_Semikolon()
+{ 
+  const char* firstSemicolon = strchr(current_input_structure, ';');
+  if (firstSemicolon != NULL) //Stelle sicher, dass es nicht das letzte Element ist
+  {
+    // Löschen Sie die Elemente bis zum ersten ';'
+    size_t shiftSize = firstSemicolon - current_input_structure + 1;
+    memmove(current_input_structure, firstSemicolon + 1, strlen(firstSemicolon + 1) + 1);
+  }
+}
+
+void clear_Structure()
+{
+  current_input_structure = "";
+}
+
+//Powered by ChatGPT
+const char** seperate_Structure() {
+    const char* delimiter = ";";
+    const char** result = (const char**)malloc(100 * sizeof(const char*)); //Maximal 50 Zeichen
+    if (result == NULL) {
+        exit(EXIT_FAILURE);
+    }
+    char* token = strtok((char*)current_input_structure, delimiter);
+    int index = 0;
+    while (token != NULL && index < 100) {
+        result[index++] = token;
+        token = strtok(NULL, delimiter);
+    }
+    result[index] = NULL;
+    return result;
+}
+
+
+void show_Structure()
+{
+  const char** structure = seperate_Structure();
+  int row = 0;
+  for(int letter = 0; structure[letter] != NULL; letter++)
+  {
+    lcd_spreadStructure(structure[letter],row);
+    row++;
+  }
+  free(structure);
+  
+}
+
+const char* interpret_Structure()
+{
+  const char** structure = seperate_Structure();
+  char result[500];  
+  result[0] = '\0';  
+
+  for (int letter = 0; structure[letter] != NULL; letter++) {
+      if (strcmp(structure[letter], " ") == 0) { //Neues Wort
+          strcat(result, " ");
+      } else 
+      {
+          Letter found_letter = check_if_Structure_is_Letter(structure[letter]);
+          strcat(result, found_letter.name);
+      }
+    }
+    free(structure);
+    return strdup(result); //dynamische Kopie
+}
+
+Letter check_if_Structure_is_Letter(const char* structure)
+{
+  for(int letter = 0; letter < total_letters; letter++)
+  {
+    if(all_Letters[letter].structure == structure)
+    {
+      return all_Letters[letter];
+    }
+    else
+    {
+      return Letter("?","?","?");
+    }
+  }
+}
+
+void show_interpreted_Structure()
+{
+  write_to_lcd(interpret_Structure(),0,false);
+}
 
