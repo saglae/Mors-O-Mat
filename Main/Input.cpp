@@ -1,7 +1,7 @@
 #include "Input.h"
 
 int dit_pause_counter = 0;
-char* current_input_structure = "";
+
 
 
 int get_Value(int pin)
@@ -90,6 +90,12 @@ void show_settings()
   write_to_lcd(output,8,false);
 }
 
+//------------------------------------------------------------Interpret Dits--------------------------------------
+
+char current_input_structure[20] = {};
+char current_interpreted_input[20] = {};
+
+
 int check_dits()
 {
   //Return Values: 0: Pause; 1: Dit; 2: Dah
@@ -130,7 +136,8 @@ void get_dit_action()
     delay(current_dit_duration);
     if(check_long_Pause_letter());
     {
-        append_Structure(';');
+      //New Letter
+      interpret_Structure();
     }
   }
   else if(action == 1)
@@ -149,80 +156,71 @@ void get_dit_action()
 
 }
 
-void append_Structure(const char* toAppend) {
-    if (strlen(current_input_structure) + strlen(toAppend) >= 100) //Zu wenig Platz im Buffer
+
+void append_Structure(char toAppend) 
+{
+    int index = get_current_structure_lenght();
+    if(index<20)
     {
-      shift_Buffer_to_first_Semikolon();
+      current_input_structure[index+1] = toAppend;
     }
-    strcat(current_input_structure, toAppend);
+    else
+    { //Buffer Overflow
+      clear_Structure();
+      current_input_structure[0] = toAppend;
+    }
 }
 
-//Powered by ChatGPT
-void shift_Buffer_to_first_Semikolon()
-{ 
-  const char* firstSemicolon = strchr(current_input_structure, ';');
-  if (firstSemicolon != NULL) //Stelle sicher, dass es nicht das letzte Element ist
-  {
-    // Löschen Sie die Elemente bis zum ersten ';'
-    size_t shiftSize = firstSemicolon - current_input_structure + 1;
-    memmove(current_input_structure, firstSemicolon + 1, strlen(firstSemicolon + 1) + 1);
-  }
-}
+
 
 void clear_Structure()
 {
-  current_input_structure = "";
+  for (int i = 0; i < 20; ++i) 
+  {
+    current_input_structure[i] = '\0';
+  }
 }
 
-//Powered by ChatGPT
-const char** seperate_Structure() {
-    const char* delimiter = ";";
-    const char** result = (const char**)malloc(100 * sizeof(const char*)); //Maximal 50 Zeichen
-    if (result == NULL) {
-        exit(EXIT_FAILURE);
-    }
-    char* token = strtok((char*)current_input_structure, delimiter);
-    int index = 0;
-    while (token != NULL && index < 100) {
-        result[index++] = token;
-        token = strtok(NULL, delimiter);
-    }
-    result[index] = NULL;
-    return result;
-}
 
 
 void show_Structure()
 {
-  const char** structure = seperate_Structure();
-  int row = 0;
-  for(int letter = 0; structure[letter] != NULL; letter++)
-  {
-    lcd_spreadStructure(structure[letter],row);
-    row++;
-  }
-  free(structure);
-  
+  int row = 1; 
+  lcd_spreadStructure(current_input_structure,row);
 }
 
-const char* interpret_Structure()
+
+
+const char interpret_Structure()
 {
-  const char** structure = seperate_Structure();
-  char result[500];  
-  result[0] = '\0';  
+  int lenght = get_current_structure_lenght();
+  char structure[lenght + 1] = {};   // + \0 
 
-  for (int letter = 0; structure[letter] != NULL; letter++) {
-      if (strcmp(structure[letter], " ") == 0) { //Neues Wort
-          strcat(result, " ");
-      } else 
-      {
-          Letter found_letter = check_if_Structure_is_Letter(structure[letter]);
-          strcat(result, found_letter.name);
-      }
-    }
-    free(structure);
-    return strdup(result); //dynamische Kopie
+  for(int i = 0; i <= lenght; i++)
+  {
+    structure[i] = current_input_structure[i];
+  }
+
+  Letter found_letter = check_if_Structure_is_Letter(structure);
+
+
+  return found_letter.name; //A,B,C,...
 }
+
+
+
+
+int get_current_structure_lenght()
+{
+  int index = 0; 
+  while (current_input_structure[index] != '\0') 
+  {
+    index++;
+  }
+  return index;
+}
+
+
 
 Letter check_if_Structure_is_Letter(const char* structure)
 {
