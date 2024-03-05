@@ -9,4 +9,15 @@
 #include "Input.h"
 
 
+/*
+Beschreibung des Lernmodus: 
+In diesem Modus soll das Hörverstehen geübt werden. Es werden Wörter/ Buchstabenkombinationen ausgegeben. 
+Diese sollen aufgeschrieben werden und können nach einer Übungseinheit dann auf dem Display zur Korrektur angeschaut werden.
+
+Nach SChwierigkeitsgrad sollen 5 Kategorien an Wörtern/Buchstabendfolgen (orientierend an den Schwierigkeitsstufen aus Modus 1) gesammelt werden.
+
+*/
+
+
+
 #endif
