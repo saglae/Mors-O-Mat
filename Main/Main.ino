@@ -32,7 +32,7 @@ void loop() {
   get_settings();
   if(speed_changed)
   {
-    //timer_configuration(current_dit_duration);
+    timer_configuration(current_dit_duration);
   }
 
   //digitalWrite(led_beat,HIGH);
