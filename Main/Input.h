@@ -30,4 +30,6 @@ extern int dit_pause_counter;
 extern char current_input_structure[20];   //Check for only ONE Structure at a time, then delete.
 extern char current_interpreted_input[20];
 
+extern bool speed_changed;
+
 #endif

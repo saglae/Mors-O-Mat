@@ -40,6 +40,7 @@ bool interpret_modus_switch(int pin)
   }
 }
 
+bool speed_changed = false;
 
 void get_settings()
 {
@@ -52,12 +53,22 @@ void get_settings()
   current_difficulty_level=interpret_potentiometer(difficulty);
   current_volume_level=interpret_potentiometer(volume);
 
+  old_dit_duration = current_dit_duration;
 
   current_dit_duration = (float) 60.0 * 1000.0 / (float)((current_speed_level * 4 + 4) * 50); //in ms                    
                                                                   //     8             12           16              20             24         WPM entsprechend nach Paris Norm:  	
                                                               //    400dit/min      600dit/min    800dit/min    1000dit/min   1200dit/min
                                                               //     150ms/dit      100ms/dit     75ms/dit       60ms/dit       50ms/dit
   
+  if(old_dit_duration == current_dit_duration)
+  {
+    speed_changed = false;
+  }
+  else
+  {
+    speed_changed = true;
+  }
+
   if(analogRead(input_switch)>500){
     paddle = true;
   }
@@ -202,7 +213,7 @@ const char interpret_Structure()
   }
 
   Letter found_letter = check_if_Structure_is_Letter(structure);
-
+  clear_Structure();
 
   return found_letter.name; //A,B,C,...
 }
