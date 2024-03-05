@@ -23,6 +23,8 @@ Einteilung in gleiche Schwierigkeitskategorien wie in Lernmodus 2.
 
 */
 
+//Gleiche wörter wie in Modus 2!
+
 
 
 #endif

@@ -19,6 +19,15 @@ Hier ist ein unterschiedlicher Schwierigkeitsgrad meiner Meinung nach nicht sinn
 
 */
 
+class Q_Code
+{
+  public: 
+  Q_Code(Letter* abbreviation, const char* translation, const char* possible_answers[], int sum_answers);
+  Letter* abbreviation; 
+  const char* translation; 
+  const char* possible_answers[3];
+  int sum_answers;
+};
 
 
 

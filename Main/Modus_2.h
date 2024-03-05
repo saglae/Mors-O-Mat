@@ -18,6 +18,11 @@ Nach SChwierigkeitsgrad sollen 5 Kategorien an Wörtern/Buchstabendfolgen (orien
 
 */
 
+extern Letter* words_difficulty_1[];
+extern Letter* words_difficulty_2[];
+extern Letter* words_difficulty_3[];
+extern Letter* words_difficulty_4[];
+extern Letter* words_difficulty_5[];
 
 
 #endif

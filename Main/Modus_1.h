@@ -19,6 +19,14 @@ Im Lernmodus 1 sollen die Buchstaben zunächst gelernt werden:
 --> Unterteilung der Buchstaben und Zahlen in 5 Schwierigkeitskategorien. Die aktuelle Schwierigkeit wird inbesondere geübt, der Rest wiederholt. 
 */
 
+extern Letter letters_difficulty_1[];
+extern Letter letters_difficulty_2[];
+extern Letter letters_difficulty_3[];
+extern Letter letters_difficulty_4[];
+extern Letter letters_difficulty_5[];
+
+
+
 
 
 #endif
