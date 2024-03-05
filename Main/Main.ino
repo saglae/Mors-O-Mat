@@ -11,6 +11,9 @@
 //Declarations
 void initialize_pins();
 
+int counter = 0; //32 Bit
+int blinking_period = 0;
+
 
 
 
@@ -21,6 +24,7 @@ void setup() {
   ucg.clearScreen();
   clear_Structure();
   interrupts();
+  timer_configuration();
   //Serial.begin(9600);
   
 
@@ -32,18 +36,19 @@ void loop() {
   get_settings();
   if(speed_changed)
   {
-    timer_configuration(current_dit_duration);
+    blinking_period = current_dit_duration / 5;
   }
+  
 
-  //digitalWrite(led_beat,HIGH);
 
   //show_settings();
+  //delay(1000);
   //playLetter(A_M);
   //playLetter(M_9);
   //playLetter(B_M);
   get_dit_action();
   
-  show_Structure();
+  //show_Structure();
   //show_interpreted_Structure();
   
 
@@ -81,27 +86,33 @@ void initialize_pins()
   pinMode(input_switch, INPUT);
 }
 
-void timer_configuration(int milliseconds)
+void timer_configuration()
 {
-
   noInterrupts();
   TCCR1A = 0;               // Setzen Sie die Timer-Konfigurationsregister zurück
   TCCR1B = 0;
 
-  TCCR1B |= (1 << CS12) | (1 << CS10);
+  TCCR1A |= (1 << WGM12);                  //CTC
+  TCCR1B |= (0 << CS12) | (1 << CS11) | (0 << CS10);    //8 Vorteiler
 
-  unsigned long timer_limit = (milliseconds * 16000000UL) / 1024 / 1000;
+  unsigned long timer_limit = (F_CPU) / (2*8)  - 1 ;    //8 Vorteiler   //Datenblatt: fOCnA = FCPU / (2*Vorteiler*(1+OCRnA));
 
   OCR1A = timer_limit;
 
   TIMSK1 |= (1 << OCIE1A);
-  interrupts();
-
+  interrupts();   //Enable Interrupts globally
 }
 
 ISR(TIMER1_COMPA_vect)
 {
-  digitalWrite(led_beat, !digitalRead(led_beat));
+  //Wird alle 5 ms aufgerufen
+  counter++;
+  if(counter == blinking_period) //blinking period 150 ... 60 --> counter 30 ... 12
+  {
+    digitalWrite(led_beat, !digitalRead(led_beat));
+    counter = 0;
+  }
+  
 }
 
 

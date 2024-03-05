@@ -23,7 +23,7 @@ int interpret_potentiometer(int pin)
 { //Abstufungen von 1...5
   //0: Fehler
   int current_value = get_Value(pin);
-  int category = map(current_value, 0, 900, 1, 5); //Erste Tests zeigten, dass die 1023 nie vollständig erreicht werden.
+  int category = map(current_value, 0, 850, 1, 5); //Erste Tests zeigten, dass die 1023 nie vollständig erreicht werden.
   return category;
 }
 
