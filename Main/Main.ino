@@ -38,7 +38,7 @@ void loop() {
   {
     blinking_period = current_dit_duration / 5;
   }
-  
+
 
 
   //show_settings();
@@ -86,6 +86,8 @@ void initialize_pins()
   pinMode(input_switch, INPUT);
 }
 
+
+
 void timer_configuration()
 {
   noInterrupts();
@@ -107,7 +109,7 @@ ISR(TIMER1_COMPA_vect)
 {
   //Wird alle 5 ms aufgerufen
   counter++;
-  if(counter == blinking_period) //blinking period 150 ... 60 --> counter 30 ... 12
+  if(counter >= blinking_period) //blinking period 150 ... 60 --> counter 30 ... 12
   {
     digitalWrite(led_beat, !digitalRead(led_beat));
     counter = 0;
