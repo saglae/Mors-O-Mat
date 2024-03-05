@@ -95,9 +95,9 @@ void timer_configuration()
   TCCR1B = 0;
 
   TCCR1A |= (1 << WGM12);                  //CTC
-  TCCR1B |= (0 << CS12) | (1 << CS11) | (0 << CS10);    //8 Vorteiler
+  TCCR1B |= (0 << CS12) | (0 << CS11) | (1 << CS10);    //8 Vorteiler
 
-  unsigned long timer_limit = (F_CPU) / (2*8)  - 1 ;    //8 Vorteiler   //Datenblatt: fOCnA = FCPU / (2*Vorteiler*(1+OCRnA));
+  unsigned long timer_limit = (F_CPU) / (1*200)  - 1 ;    //8 Vorteiler   //Datenblatt: fOCnA = FCPU / (2*Vorteiler*(1+OCRnA)); 
 
   OCR1A = timer_limit;
 
@@ -105,17 +105,7 @@ void timer_configuration()
   interrupts();   //Enable Interrupts globally
 }
 
-ISR(TIMER1_COMPA_vect)
-{
-  //Wird alle 5 ms aufgerufen
-  counter++;
-  if(counter >= blinking_period) //blinking period 150 ... 60 --> counter 30 ... 12
-  {
-    digitalWrite(led_beat, !digitalRead(led_beat));
-    counter = 0;
-  }
-  
-}
+
 
 
 
@@ -140,4 +130,19 @@ void checkMode()
   {
     write_to_lcd("Q-Schlüssel",1,true);
   }
+}
+
+//-------------------------ISR------------------------------------
+
+
+ISR(TIMER1_COMPA_vect)
+{
+  //Wird alle 5 ms aufgerufen
+  counter++;
+  if(counter >= blinking_period) //blinking period 150 ... 60 --> counter 30 ... 12
+  {
+    digitalWrite(led_beat, !digitalRead(led_beat));
+    counter = 0;
+  }
+  
 }
