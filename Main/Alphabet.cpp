@@ -59,14 +59,16 @@ Letter M_Point(".-.-.-","Punkt",".");
 Letter M_AE(".-.-","Ärger","Ä");  //Definitionen ausgedacht! 
 Letter M_OE("---.","Öfen","Ö"); 
 Letter M_UE("..--","Übel","Ü");
+Letter M_Bruchstrich("-..-.","Bruchstrich","/");
+
 
 Letter all_Letters[] = {A_M, B_M, C_M, D_M, E_M, F_M, G_M, H_M, I_M, J_M, K_M, 
                         L_M, M_M, N_M, O_M, P_M, Q_M, R_M, S_M, T_M, U_M, V_M, 
                         W_M, X_M, Y_M, Z_M, 
-                        M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8, M_9, M_0
-                        M_Question_Mark, M_Start, M_End, M_Error, M_Comma, M_Seperate, M_Point, M_AE, M_OE, M_UE};
+                        M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8, M_9, M_0,
+                        M_Question_Mark, M_Start, M_End, M_Error, M_Comma, M_Seperate, M_Point, M_AE, M_OE, M_UE, M_Bruchstrich};
 
-int total_letters = 46;
+int total_letters = 47;
 
 //Quellen: https://dj4uf.de/morsen 
 //Quellen: https://www.marinecom.ch/e-learning/seefunk-alphabet/

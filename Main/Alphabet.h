@@ -42,6 +42,7 @@ extern Letter Z_M;
 
 extern Letter M_1;
 extern Letter M_2;
+extern Letter M_3;
 extern Letter M_4;
 extern Letter M_5;
 extern Letter M_6;
@@ -60,6 +61,8 @@ extern Letter M_Point;
 extern Letter M_AE; 
 extern Letter M_OE; 
 extern Letter M_UE;
+extern Letter M_Bruchstrich;
+
 
 
 extern Letter all_Letters[];
