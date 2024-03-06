@@ -50,6 +50,18 @@ extern Letter M_8;
 extern Letter M_9;
 extern Letter M_0;
 
+extern Letter M_Question_Mark;
+extern Letter M_Start; 
+extern Letter M_End; 
+extern Letter M_Error; 
+extern Letter M_Comma; 
+extern Letter M_Seperate; 
+extern Letter M_Point; 
+extern Letter M_AE; 
+extern Letter M_OE; 
+extern Letter M_UE;
+
+
 extern Letter all_Letters[];
 extern int total_letters;
 
