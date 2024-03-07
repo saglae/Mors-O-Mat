@@ -24,5 +24,7 @@ extern Letter words_difficulty_3[39][5];
 extern Letter words_difficulty_4[44][5];
 extern Letter words_difficulty_5[64][5];
 
+void play_Word(Letter word[][5], int word_nr);
+
 
 #endif

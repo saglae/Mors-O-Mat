@@ -196,5 +196,14 @@ Letter words_difficulty_5[64][5] = {{Z_M, F_M, B_M, P_M, W_M},                //
                                   {M_AE, P_M, F_M, E_M, L_M},
                                   {F_M, L_M, U_M, S_M, S_M}};
 
+void play_Word(Letter words[][5], int word_nr)
+{
+  for (int i = 0; i < 5; i++)
+  {
+      playLetter(words[word_nr][i]);
+  }
+  delay(current_dit_duration*4); //playLetter verzögert automatisch um 3 dits nach jedem Buchstaben!
+}
+
 
 

@@ -5,6 +5,11 @@
 #include "Display_Functions.h"
 #include "Buzzer_Functions.h"
 #include "Input.h"
+#include "Modus_1.h"
+#include "Modus_2.h"
+#include "Modus_3.h"
+#include "Modus_4.h"
+
 
 
 
@@ -35,8 +40,8 @@ void loop() {
 
   get_settings();
   if(speed_changed)
-  {
-    blinking_period = current_dit_duration / 5;
+  {//Currently signals when a new word would start.
+    blinking_period = current_dit_duration * 7 / 5;
   }
 
 
@@ -46,7 +51,12 @@ void loop() {
   //playLetter(A_M);
   //playLetter(M_9);
   //playLetter(B_M);
-  get_dit_action();
+  //get_dit_action();
+  //playLetter(M_M);
+  //playLetter(M_9);
+  //playLetter(S_M);
+  //play_Word(words_difficulty_1, 3);
+  //delay(2000);
   
   //show_Structure();
   //show_interpreted_Structure();
