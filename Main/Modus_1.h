@@ -19,11 +19,11 @@ Im Lernmodus 1 sollen die Buchstaben zunächst gelernt werden:
 --> Unterteilung der Buchstaben und Zahlen in 5 Schwierigkeitskategorien. Die aktuelle Schwierigkeit wird inbesondere geübt, der Rest wiederholt. 
 */
 
-extern Letter letters_difficulty_1[10];
-extern Letter letters_difficulty_2[10];
-extern Letter letters_difficulty_3[10];
-extern Letter letters_difficulty_4[8];
-extern Letter letters_difficulty_5[9];
+/*extern const Letter PROGMEM letters_difficulty_1[10];
+extern const Letter PROGMEM letters_difficulty_2[10];
+extern const Letter PROGMEM letters_difficulty_3[10];
+extern const Letter PROGMEM letters_difficulty_4[8];
+extern const Letter PROGMEM letters_difficulty_5[9];*/
 
 
 

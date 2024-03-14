@@ -8,10 +8,11 @@ class Letter
 {
   public: 
       Letter () {};
-      Letter(const char* structure, const char* definition, const char* name); //Konstruktor: Structure, Definition
+      Letter(const char* structure, const char* definition, const char* name, int difficulty); //Konstruktor: Structure, Definition
       const char* structure;
       const char* definition;
       const char* name;
+      int difficulty;
 };
 
 extern Letter A_M;

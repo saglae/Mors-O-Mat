@@ -18,13 +18,14 @@ Nach SChwierigkeitsgrad sollen 5 Kategorien an Wörtern/Buchstabendfolgen (orien
 
 */
 
+/*
 extern Letter words_difficulty_1[17][5];
 extern Letter words_difficulty_2[25][5];
 extern Letter words_difficulty_3[39][5];
 extern Letter words_difficulty_4[44][5];
-extern Letter words_difficulty_5[64][5];
+extern Letter words_difficulty_5[64][5];*/
 
-void play_Word(int difficulty, int word_nr);
+//void play_Word(int difficulty, int word_nr);
 
 
 #endif

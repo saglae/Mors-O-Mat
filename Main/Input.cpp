@@ -42,6 +42,9 @@ bool interpret_modus_switch(int pin)
 
 bool speed_changed = false;
 
+bool understood = false;
+
+
 void get_settings()
 {
   bool mod1_old = mod1;
@@ -61,6 +64,7 @@ void get_settings()
   else
   {
     mod_changed = true;
+    understood = false;
   }
 
   current_speed_level=interpret_potentiometer(speed);
@@ -91,29 +95,7 @@ void get_settings()
   }
 }
 
-void show_settings()
-{
-  const char output[30];
-  write_to_lcd("----Settings----",0,true);
-  snprintf(output, sizeof(output), "Modus 1:   %s", mod1 ? "true" : "false");
-  write_to_lcd(output,1,false);
-  snprintf(output, sizeof(output), "Modus 2:   %s", mod2 ? "true" : "false");
-  write_to_lcd(output,2,false);
-  snprintf(output, sizeof(output), "Modus 3:   %s", mod3 ? "true" : "false");
-  write_to_lcd(output,3,false);
-  snprintf(output, sizeof(output), "Modus 4:   %s", mod4 ? "true" : "false");
-  write_to_lcd(output,4,false);
 
-  snprintf(output, sizeof(output), "Speed:     %d/5     Dit: %d ms", current_speed_level, current_dit_duration);
-  write_to_lcd(output,5,false);
-  snprintf(output, sizeof(output), "Difficulty:   %d/5", current_difficulty_level);
-  write_to_lcd(output,6,false);
-  snprintf(output, sizeof(output), "Volume:   %d/5", current_volume_level);
-  write_to_lcd(output,7,false);
-
-  snprintf(output, sizeof(output), "Paddle:   %s", paddle ? "true" : "false");
-  write_to_lcd(output,8,false);
-}
 
 //------------------------------------------------------------Interpret Dits--------------------------------------
 
@@ -149,6 +131,7 @@ bool check_long_Pause_letter()
     return false;
   }
 }
+
 
 void get_dit_action()
 {
@@ -216,7 +199,7 @@ void show_Structure()
 
 
 
-const char interpret_Structure()
+const char* interpret_Structure()
 {
   int lenght = get_current_structure_lenght();
   char structure[lenght + 1] = {};   // + \0 
@@ -257,7 +240,7 @@ Letter check_if_Structure_is_Letter(const char* structure)
     }
     else
     {
-      return Letter("?","?","?");
+      return Letter("?","?","?",0);
     }
   }
 }
@@ -266,4 +249,7 @@ void show_interpreted_Structure()
 {
   write_to_lcd(interpret_Structure(),0,false);
 }
+
+//---------------------------------------------------------------------------
+
 

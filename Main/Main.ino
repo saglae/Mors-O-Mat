@@ -44,6 +44,57 @@ void loop() {
     blinking_period = current_dit_duration * 7 / 5;
   }
 
+  if(mod_changed)
+  {
+    ucg.clearScreen();
+  }
+
+  if(mod1)
+  {// Buchstaben lernen
+    show_mod1_start_display();
+    if(understood)
+    {
+      ucg.clearScreen();
+    }
+
+  }
+
+  else if(mod2)
+  { // Hörverstehen
+    show_mod2_start_display();
+    if(understood)
+    {
+      ucg.clearScreen();
+    }
+
+
+  }
+
+
+  else if(mod3)
+  { // Wörter geben
+    show_mod3_start_display();
+    if(understood)
+    {
+      ucg.clearScreen();
+    }
+
+  }
+
+
+  else if(mod4)
+  { // Q-Code
+
+      // Currently not usable due to memory shortage --> Upgrade controller. Since this exercise is optional, delay. 
+
+  }
+
+  else
+  {
+    //Willkommensbildschirm
+    show_start_display();
+  }
+
 
 
   //show_settings();
@@ -52,9 +103,9 @@ void loop() {
   //playLetter(M_9);
   //playLetter(B_M);
   //get_dit_action();
-  playLetter(M_M);
-  playLetter(M_9);
-  playLetter(S_M);
+  //playLetter(M_M);
+  //playLetter(M_9);
+  //playLetter(T_M);
   //play_Word(words_difficulty_1, 3);
   //delay(2000);
   
@@ -98,7 +149,7 @@ void initialize_pins()
 
 
 
-void timer_configuration()
+/*void timer_configuration()
 {
   noInterrupts();
   TCCR1A = 0;               // Setzen Sie die Timer-Konfigurationsregister zurück
@@ -113,39 +164,13 @@ void timer_configuration()
 
   TIMSK1 |= (1 << OCIE1A);
   interrupts();   //Enable Interrupts globally
-}
+}*/
 
-
-
-
-
-void checkMode()
-{
-
-  //write_to_lcd("Test");
-  if(digitalRead(modus_1))
-  {
-    
-    write_to_lcd("Buchstaben lernen",1,true);
-  }
-  else if(digitalRead(modus_2))
-  {
-    write_to_lcd("Hörverstehen",1,true);
-  }
-  else if(digitalRead(modus_3))
-  {
-    write_to_lcd("Wörter geben",1,true);
-  }
-  else if(digitalRead(modus_4))
-  {
-    write_to_lcd("Q-Schlüssel",1,true);
-  }
-}
 
 //-------------------------ISR------------------------------------
 
 
-ISR(TIMER1_COMPA_vect)
+/*ISR(TIMER1_COMPA_vect)
 {
   //Wird alle 5 ms aufgerufen
   counter++;
@@ -155,4 +180,4 @@ ISR(TIMER1_COMPA_vect)
     counter = 0;
   }
   
-}
+}*/

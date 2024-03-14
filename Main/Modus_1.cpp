@@ -1,11 +1,11 @@
 #include "Modus_1.h"
 
 
-Letter letters_difficulty_1[10] = {E_M, S_M, N_M, O_M, M_Start, M_End, M_Error, T_M, Q_M, M_5};
-Letter letters_difficulty_2[10] = {R_M, U_M, M_9, M_Seperate, C_M, D_M, M_0, A_M, L_M, M_8};
-Letter letters_difficulty_3[10] = {I_M, X_M, M_4, M_Point, M_M, M_7, Y_M, M_1, H_M, M_6};
-Letter letters_difficulty_4[8] = {M_Question_Mark, J_M, M_3, G_M, M_2, V_M, K_M, M_Comma};
-Letter letters_difficulty_5[9] = {Z_M, F_M, B_M, P_M, W_M, M_Bruchstrich, M_AE, M_OE, M_UE};
+/*const Letter PROGMEM letters_difficulty_1[10] = {E_M, S_M, N_M, O_M, M_Start, M_End, M_Error, T_M, Q_M, M_5};
+const Letter PROGMEM letters_difficulty_2[10] = {R_M, U_M, M_9, M_Seperate, C_M, D_M, M_0, A_M, L_M, M_8};
+const Letter PROGMEM letters_difficulty_3[10] = {I_M, X_M, M_4, M_Point, M_M, M_7, Y_M, M_1, H_M, M_6};
+const Letter PROGMEM letters_difficulty_4[8] = {M_Question_Mark, J_M, M_3, G_M, M_2, V_M, K_M, M_Comma};
+const Letter PROGMEM letters_difficulty_5[9] = {Z_M, F_M, B_M, P_M, W_M, M_Bruchstrich, M_AE, M_OE, M_UE};*/
 
 
 /*

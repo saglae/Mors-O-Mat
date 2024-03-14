@@ -1,7 +1,7 @@
 #include "Modus_2.h"
 
 
-Letter words_difficulty_1[17][5] = {{E_M, S_M, N_M, O_M, M_5},      //5er Gruppen
+/*Letter words_difficulty_1[17][5] = {{E_M, S_M, N_M, O_M, M_5},      //5er Gruppen
                                 {M_Error, T_M, Q_M, E_M, S_M},
                                 {M_5, O_M, T_M, Q_M, E_M},
                                 {S_M, N_M, O_M, M_Error, T_M},
@@ -195,7 +195,9 @@ Letter words_difficulty_5[64][5] = {{Z_M, F_M, B_M, P_M, W_M},                //
                                   {S_M, M_UE, D_M, E_M, N_M},                
                                   {M_AE, P_M, F_M, E_M, L_M},
                                   {F_M, L_M, U_M, S_M, S_M}};
+*/
 
+/*
 void play_Word(int difficulty, int word_nr)
 {
   //Probleme da Difficulty Arrays unterschiedliche Dimensionen haben. --> Workaround!
@@ -243,6 +245,8 @@ void play_Word(int difficulty, int word_nr)
   
   delay(current_dit_duration*4); //playLetter verzögert automatisch um 3 dits nach jedem Buchstaben!
 }
+
+*/
 
 
 
