@@ -14,5 +14,7 @@ bool mod2 = false;
 bool mod3 = false;
 bool mod4 = false;
 
+bool mod_changed = false;
+
 bool paddle = false;
 

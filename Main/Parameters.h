@@ -42,6 +42,8 @@ extern bool mod2;
 extern bool mod3;
 extern bool mod4;
 
+extern bool mod_changed;
+
 extern bool paddle;
 
 #endif

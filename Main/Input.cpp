@@ -44,10 +44,24 @@ bool speed_changed = false;
 
 void get_settings()
 {
+  bool mod1_old = mod1;
+  bool mod2_old = mod2;
+  bool mod3_old = mod3;
+  bool mod4_old = mod4;
+
   mod1 = interpret_modus_switch(modus_1);
   mod2 = interpret_modus_switch(modus_2);
   mod3 = interpret_modus_switch(modus_3);
   mod4 = interpret_modus_switch(modus_4);
+
+  if(mod1_old == mod1 && mod2_old == mod2 && mod3_old == mod3 && mod4_old == mod4)
+  {
+    mod_changed = false;
+  }
+  else
+  {
+    mod_changed = true;
+  }
 
   current_speed_level=interpret_potentiometer(speed);
   current_difficulty_level=interpret_potentiometer(difficulty);
