@@ -25,9 +25,9 @@ void playTone(int buzzerPin, int frequency, int duration, int volume) {  //durat
 void playLetter(Letter x)
 {
   const char* structure = x.structure;
-  int sum_chars = sizeof(structure)/sizeof(structure[0]);
+  int sum_chars = countElements(x.structure);
   float dit = current_dit_duration; 
-  int dah = dit * 3;
+  float dah = dit * 3;
 
   for(int char_index = 0; char_index < sum_chars; char_index++)
   {
@@ -44,20 +44,21 @@ void playLetter(Letter x)
   delay(dit*2);
 }
 
-
-  int get_total_Dashes(Letter x)
-  {
-    int sum_chars = sizeof(x.structure)/sizeof(x.structure[0]);
-    int dashes = 0;
-    for(int char_index = 0; char_index < sum_chars; char_index++)
-    {
-      if(x.structure[char_index] == '-')
-      {
-        dashes++;
-      }
+int countElements(const char* structure) 
+{
+    int count = 0;
+    
+    while (*structure) {
+        if (*structure != '\0') {
+            count++;
+        }
+        structure++;
     }
-    return dashes;
-  }
+
+    return count;
+}
+
+
 
   
   

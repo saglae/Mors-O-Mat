@@ -11,6 +11,7 @@
 
 void playTone(int buzzerPin, int frequency, int duration, int volume);
 void playLetter(Letter x);
-int get_total_Dashes(Letter x);
+int countElements(const char* structure);
+
 
 #endif
