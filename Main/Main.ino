@@ -3,7 +3,6 @@
 #include "Parameters.h"
 #include "Alphabet.h"
 #include "Input.h"
-#include "Modus_1.h"
 #include "Modus_2.h"
 #include "Modus_3.h"
 #include "Modus_4.h"
@@ -22,6 +21,7 @@ int counter = 0; //32 Bit
 int counter_10s = 0;
 int8_t letter_counter = 0;
 int blinking_period = 0;
+Letter current_word_to_play[5];
 
 
 
@@ -59,6 +59,82 @@ void loop() {
 
   if(mod1 && ! mod1_try_yourself)
   {// Buchstaben lernen
+    learn_modus_1();
+  }
+  else if(mod1 && mod1_try_yourself)
+  {
+    get_dit_action();
+  } 
+
+
+
+  else if(mod2)
+  { // Hörverstehen
+    show_mod2_start_display();
+
+
+    char words[3][5];
+
+    write_to_lcd("Hoer zu!", 3, false);
+    playLetter(M_Start);
+
+    // 3x 5er Gruppe abspielen
+    for(int word = 0; word < 3 ; word++)
+    { 
+      for(int letter = 0; letter < 5; letter++)
+      {
+        int randomNumber = generate_random();
+        words[word][letter] = all_Letters[randomNumber].name; //Für das Ergebnis sichern!
+        playLetter(all_Letters[randomNumber]);
+      }
+      delay(3*current_dit_duration);
+    }
+
+    playLetter(M_End);
+
+    write_to_lcd("Ergebnis? >> dit", 6, false);
+    while(analogRead(dot) < 500) {}; //
+    ucg.clearScreen();
+
+    //Ergebnisse anzeigen 
+    show_mod2_start_display();
+    write_to_lcd(words[0][5], 2 ,false);
+    write_to_lcd(words[1][5], 3 ,false);
+    write_to_lcd(words[2][5], 4 ,false);
+
+
+
+
+    //Weiter
+    write_to_lcd("Weiter? >> dit", 7, false);
+    while(analogRead(dot) < 500) {};
+    ucg.clearScreen();
+
+  }
+  else if(mod3)
+  { // Wörter geben
+    show_mod3_start_display();
+
+
+  }
+  else if(mod4)
+  { // Q-Code
+
+      // Currently not usable due to memory shortage --> Upgrade controller. Since this exercise is optional, delay. 
+
+  }
+
+  else
+  {
+    //Willkommensbildschirm
+    show_start_display();
+  }
+
+}
+
+
+void learn_modus_1()
+{
     ucg.clearScreen();
     show_mod1_start_display();
 
@@ -88,40 +164,14 @@ void loop() {
     {
       letter_counter++;
     }
-  }
-  else if(mod1 && mod1_try_yourself)
-  {
-    get_dit_action();
-  } 
-
-
-
-  else if(mod2)
-  { // Hörverstehen
-    show_mod2_start_display();
-
-  }
-  else if(mod3)
-  { // Wörter geben
-    show_mod3_start_display();
-
-
-  }
-  else if(mod4)
-  { // Q-Code
-
-      // Currently not usable due to memory shortage --> Upgrade controller. Since this exercise is optional, delay. 
-
-  }
-
-  else
-  {
-    //Willkommensbildschirm
-    show_start_display();
-  }
-
 }
 
+int generate_random()
+{
+  int pseudo_random = counter; //Get current counter used for blinking LED --> 12...30 
+  randomSeed(pseudo_random);
+  return random(0,(6 + (current_difficulty_level - 1)*10));
+}
 
 //Definitions
 void initialize_pins()
