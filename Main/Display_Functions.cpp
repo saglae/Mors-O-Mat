@@ -171,9 +171,9 @@ void show_mod3_start_display()
 {
   //Überschrift
   ucg.setFont(ucg_font_ncenR18_tr);
-  ucg.setPrintPos(55,25); 
+  ucg.setPrintPos(35,25); 
   ucg.setColor(118,181,197);
-  ucg.print("Buchstaben lernen");
+  ucg.print("5er Gruppen nehmen");
 
   //Unterstreichen 
   ucg.setColor(0, 0, 255, 255);
@@ -184,11 +184,11 @@ void show_mod3_start_display()
   ucg.setFont(ucg_font_ncenR10_tr);
   ucg.setPrintPos(15,80); 
   ucg.setColor(255,255,255);
-  ucg.print("Ich spiele gleich Buchstaben vor. Auf dem"); 
+  ucg.print("Gebe die gezeigten 5er Gruppen. Ein _ "); 
   ucg.setPrintPos(15,100); 
-  ucg.print("Display siehst du dazu relevante Infos."); 
+  ucg.print("zeigt dir den aktuellen Buchstaben. Achte"); 
   ucg.setPrintPos(15,120); 
-  ucg.print("Nach 3 Wiederholungen bist du dran! :)"); 
+  ucg.print("auf das Tempo!"); 
   ucg.setPrintPos(15,140); 
   ucg.print("Alles verstanden? Dann starte mit einem dit.");  
 
@@ -200,10 +200,8 @@ void show_mod3_start_display()
   //Tipp
   ucg.setFont(ucg_font_ncenR10_tr);
   ucg.setColor(118,181,197); 
-  ucg.setPrintPos(10,200); 
-  ucg.print("Tipp: Du kennst schon alles, was ich");
-  ucg.setPrintPos(10,220); 
-  ucg.print("          vorspiele? Erhoehe die Schwierigkeit!"); 
+  ucg.setPrintPos(130,200); 
+  ucg.print("Viel Spass!");
 }
 
 
