@@ -1,7 +1,7 @@
 #ifndef MODUS_4
 #define MODUS_4
 
-
+/*
 #include "Parameters.h"
 #include "Alphabet.h"
 #include "Display_Functions.h"
@@ -17,16 +17,30 @@ Der Mors-O-Mat gibt wie in Modus 2 Wörter/Abkürzungen aus, auf die der Nutzer 
 
 Hier ist ein unterschiedlicher Schwierigkeitsgrad meiner Meinung nach nicht sinnvoll.
 
-*/
+/*
+
+
 
 class Q_Code
 {
   public: 
-  Q_Code(Letter abbreviation[4], const char* translation, const char* possible_answers[], int sum_answers);
-  Letter abbreviation[4]; 
-  const char* translation; 
-  const char* possible_answers[3];
-  int sum_answers;
+      // Konstruktor mit den angegebenen Parametern
+    Q_Code(const Letter abbreviation[4], const char translation, const char* possible_answers[3])
+        : translation(translation)
+    {
+        // Kopiere die Zeiger auf die Buchstabenobjekte
+        for (int i = 0; i < 4; ++i) {
+            this->abbreviation[i] = abbreviation[i];
+        }
+        
+        // Kopiere die möglichen Antworten
+        for (int i = 0; i < 3; ++i) {
+            this->possible_answers[i] = possible_answers[i];
+        }
+    };
+    const Letter abbreviation[4]; // Array von Pointern auf Letter-Objekte
+    const char translation; // Pointer auf die Übersetzung
+    const char* possible_answers[3]; // Array von Pointern auf mögliche Antworten
 };
 
 extern Q_Code QAM;
@@ -60,6 +74,6 @@ extern Q_Code QTR;
 
 
 
-
+*/
 
 #endif

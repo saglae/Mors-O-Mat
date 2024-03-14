@@ -9,6 +9,8 @@ Letter::Letter(const char* structure, const char* definition, const char* name) 
     this->name = name;
 }
 
+
+
 //Instanzen der Klasse
 
 Letter A_M(".-","Alpha","A");

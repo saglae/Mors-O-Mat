@@ -7,6 +7,7 @@
 class Letter 
 {
   public: 
+      Letter () {};
       Letter(const char* structure, const char* definition, const char* name); //Konstruktor: Structure, Definition
       const char* structure;
       const char* definition;

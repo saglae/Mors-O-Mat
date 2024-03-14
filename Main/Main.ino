@@ -28,8 +28,8 @@ void setup() {
   ucg.begin(UCG_FONT_MODE_TRANSPARENT);
   ucg.clearScreen();
   clear_Structure();
-  interrupts();
-  timer_configuration();
+  //interrupts();
+  //timer_configuration();
   //Serial.begin(9600);
   
 
@@ -52,9 +52,9 @@ void loop() {
   //playLetter(M_9);
   //playLetter(B_M);
   //get_dit_action();
-  //playLetter(M_M);
-  //playLetter(M_9);
-  //playLetter(S_M);
+  playLetter(M_M);
+  playLetter(M_9);
+  playLetter(S_M);
   //play_Word(words_difficulty_1, 3);
   //delay(2000);
   
