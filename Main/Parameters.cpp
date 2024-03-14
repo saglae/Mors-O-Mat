@@ -21,3 +21,5 @@ bool tone_enabled = false;
 
 bool paddle = false;
 
+bool init_mod3 = false; 
+

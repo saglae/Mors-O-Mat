@@ -197,56 +197,6 @@ Letter words_difficulty_5[64][5] = {{Z_M, F_M, B_M, P_M, W_M},                //
                                   {F_M, L_M, U_M, S_M, S_M}};
 */
 
-/*
-void play_Word(int difficulty, int word_nr)
-{
-  //Probleme da Difficulty Arrays unterschiedliche Dimensionen haben. --> Workaround!
-  if(difficulty == 1)
-  {
-    for (int i = 0; i < 5; i++)
-    {
-        playLetter(words_difficulty_1[word_nr][i]);
-    }
-  };
-
-  if(difficulty == 2)
-  {
-    for (int i = 0; i < 5; i++)
-    {
-        playLetter(words_difficulty_2[word_nr][i]);
-    }
-  };
-
-  if(difficulty == 3)
-  {
-    for (int i = 0; i < 5; i++)
-    {
-        playLetter(words_difficulty_3[word_nr][i]);
-    }
-  }; 
-
-  if(difficulty == 4)
-  {
-    for (int i = 0; i < 5; i++)
-    {
-        playLetter(words_difficulty_4[word_nr][i]);
-    }
-  };
-  
-  if(difficulty == 5)
-  {
-    for (int i = 0; i < 5; i++)
-    {
-        playLetter(words_difficulty_5[word_nr][i]);
-    }
-  };
-  
-  
-  
-  delay(current_dit_duration*4); //playLetter verzögert automatisch um 3 dits nach jedem Buchstaben!
-}
-
-*/
 
 
 

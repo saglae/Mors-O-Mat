@@ -8,9 +8,6 @@ int get_Value(int pin)
 {
   return analogRead(pin);
 }
-
-
-
 void show_Value(int pin)
 {
   char output[20];
@@ -18,7 +15,6 @@ void show_Value(int pin)
   write_to_lcd(output, 0, true);
   delay(1000);
 }
-
 int interpret_potentiometer(int pin)
 { //Abstufungen von 1...5
   //0: Fehler
@@ -26,7 +22,6 @@ int interpret_potentiometer(int pin)
   int category = map(current_value, 0, 850, 1, 5); //Erste Tests zeigten, dass die 1023 nie vollständig erreicht werden.
   return category;
 }
-
 bool interpret_modus_switch(int pin)
 {
   int current_value = digitalRead(pin);
@@ -62,6 +57,15 @@ void get_settings()
   else
   {
     mod_changed = true;
+  }
+
+  if(mod3_old == 0 && mod1 == 1)
+  {
+    init_mod3 = true;     //--> initialization of modus 3 runs only one time
+  }
+  else
+  {
+    init_mod3 = false;
   }
 
   int old_difficulty_level = current_difficulty_level;

@@ -49,4 +49,6 @@ extern bool tone_enabled;
 
 extern bool paddle;
 
+extern bool init_mod3;
+
 #endif

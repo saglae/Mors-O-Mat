@@ -3,8 +3,6 @@
 #include "Parameters.h"
 #include "Alphabet.h"
 #include "Input.h"
-#include "Modus_2.h"
-#include "Modus_3.h"
 #include "Modus_4.h"
 #include "Display_Functions.h"
 #include "Buzzer_Functions.h"
@@ -23,6 +21,8 @@ int8_t letter_counter = 0;
 int blinking_period = 0;
 Letter current_word_to_play[5];
 
+
+int8_t counter_mod3 = 0;
 
 
 
@@ -65,19 +65,39 @@ void loop() {
   {
     get_dit_action();
   } 
-
-
-
   else if(mod2)
   { // Hörverstehen
     learn_modus_2();
   }
 
-
   else if(mod3)
   { // Wörter geben
     show_mod3_start_display();
+    if(init_mod3)
+    {
+    static Letter word[5];
+    static char word_to_display[6]; //+ delimiter
+    static char progress[6];
 
+    for(int letter = 0; letter < 5; letter++)
+    {
+      int randomNumber = generate_random();
+      word[letter] = all_Letters[randomNumber];
+      word_to_display[letter] = all_Letters[randomNumber].name[0];
+      progress[letter] = '\0';
+    }
+    word_to_display[5] = '\0'; //Delimiter dran
+    progress[5] = '\0';
+
+    write_to_lcd("Start >> dit",2,false);
+    write_to_lcd(progress,3,false);
+    write_to_lcd(word_to_display, 4, false);
+
+    while(analogRead(dot)<500) {};
+    }
+    
+    
+    //Write corrected word!
 
   }
   else if(mod4)
@@ -131,7 +151,7 @@ void learn_modus_1()
 
 int generate_random()
 {
-  int pseudo_random = counter; //Get current counter used for blinking LED --> 12...30 
+  int pseudo_random = millis();
   randomSeed(pseudo_random);
   return random(0,(6 + (current_difficulty_level - 1)*10));
 }
