@@ -73,7 +73,7 @@ void loop() {
     show_mod2_start_display();
 
 
-    char words[3][5];
+    const char* words[3];
 
     write_to_lcd("Hoer zu!", 3, false);
     playLetter(M_Start);
@@ -81,12 +81,15 @@ void loop() {
     // 3x 5er Gruppe abspielen
     for(int word = 0; word < 3 ; word++)
     { 
+      char current_word[6]; 
       for(int letter = 0; letter < 5; letter++)
       {
         int randomNumber = generate_random();
-        words[word][letter] = all_Letters[randomNumber].name; //Für das Ergebnis sichern!
+        current_word[letter] = all_Letters[randomNumber].name[0]; //Für das Ergebnis sichern!
         playLetter(all_Letters[randomNumber]);
       }
+      current_word[5] = '\0'; //Das letzte Element ist der delimiter
+      words[word] = current_word;
       delay(3*current_dit_duration);
     }
 
@@ -98,12 +101,9 @@ void loop() {
 
     //Ergebnisse anzeigen 
     show_mod2_start_display();
-    write_to_lcd(words[0][5], 2 ,false);
-    write_to_lcd(words[1][5], 3 ,false);
-    write_to_lcd(words[2][5], 4 ,false);
-
-
-
+    write_to_lcd(words[0], 2 ,false);
+    write_to_lcd(words[1], 3 ,false);
+    write_to_lcd(words[2], 4 ,false);
 
     //Weiter
     write_to_lcd("Weiter? >> dit", 7, false);
