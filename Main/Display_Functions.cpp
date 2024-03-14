@@ -46,3 +46,40 @@ void lcd_spreadStructure(const char* structure, int row)
     ucg.print(structure[index]);
   }
 }
+
+void show_start_display()
+{
+  ucg.setRotate270();
+  //Überschrift
+  ucg.setFont(ucg_font_courB18_tr);
+  ucg.setPrintPos(80,25); 
+  ucg.setColor(118,181,197);
+  ucg.print("Mors-O-Mat");
+
+  //Unterstreichen 
+  ucg.setColor(0, 0, 255, 255);
+  ucg.setColor(1, 255, 255, 0);
+  ucg.drawGradientLine(50, 40, 220, 0);
+
+  //Willkommen
+  ucg.setFont(ucg_font_ncenR14_tr);
+  ucg.setPrintPos(60,100); 
+  ucg.setColor(255,255,255);
+  ucg.print("Herzlich Willkommen!"); 
+  //Modus
+  ucg.setPrintPos(40,130); 
+  ucg.setColor(255,255,255);
+  ucg.print("Was willst du heute lernen?");
+
+  //Unterstreichen 
+  ucg.setColor(0, 0, 255, 255);
+  ucg.setColor(1, 255, 255, 0);
+  ucg.drawGradientLine(50, 170, 220, 0);
+
+  //Anzeige der Modi 
+  ucg.setFont(ucg_font_ncenR10_tr);
+  ucg.setPrintPos(10,220); 
+  ucg.setColor(255,255,255);
+  ucg.print("Buchstaben  --  Nehmen  --  Geben  --  Q-Code");
+
+}
