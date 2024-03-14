@@ -128,74 +128,82 @@ void show_mod1_start_display()
 
 void show_mod2_start_display()
 {
-  ucg.setRotate270();
   //Überschrift
-  ucg.setFont(ucg_font_courB18_tr);
-  ucg.setPrintPos(80,25); 
+  ucg.setFont(ucg_font_ncenR18_tr);
+  ucg.setPrintPos(50,25); 
   ucg.setColor(118,181,197);
-  ucg.print("Mors-O-Mat");
+  ucg.print("5er Gruppen geben");
 
   //Unterstreichen 
   ucg.setColor(0, 0, 255, 255);
   ucg.setColor(1, 255, 255, 0);
   ucg.drawGradientLine(50, 40, 220, 0);
 
-  //Willkommen
-  ucg.setFont(ucg_font_ncenR14_tr);
-  ucg.setPrintPos(60,100); 
+  //Erklärung
+  ucg.setFont(ucg_font_ncenR10_tr);
+  ucg.setPrintPos(15,80); 
   ucg.setColor(255,255,255);
-  ucg.print("Herzlich Willkommen!"); 
-  //Modus
-  ucg.setPrintPos(40,130); 
-  ucg.setColor(255,255,255);
-  ucg.print("Was willst du heute lernen?");
+  ucg.print("Schnapp dir Stift und Papier! Schreibe"); 
+  ucg.setPrintPos(15,100); 
+  ucg.print("die nachfolgenden 5er Gruppen auf. Mit"); 
+  ucg.setPrintPos(15,120); 
+  ucg.print("einem dit erscheint die Loesung."); 
+  ucg.setPrintPos(15,140); 
+  ucg.print("Alles verstanden? Dann starte mit einem dit.");  
 
   //Unterstreichen 
   ucg.setColor(0, 0, 255, 255);
   ucg.setColor(1, 255, 255, 0);
-  ucg.drawGradientLine(50, 170, 220, 0);
+  ucg.drawGradientLine(50, 160, 220, 0);
 
-  //Anzeige der Modi 
+  //Tipp
   ucg.setFont(ucg_font_ncenR10_tr);
+  ucg.setColor(118,181,197); 
+  ucg.setPrintPos(10,180); 
+  ucg.print("Tipp: Wenn du etwas nicht erkennst, dann");
+  ucg.setPrintPos(10,200); 
+  ucg.print("          wechsle mit dem gleichen Schwierig-"); 
   ucg.setPrintPos(10,220); 
-  ucg.setColor(255,255,255);
-  ucg.print("Buchstaben  --  Nehmen  --  Geben  --  Q-Code");
+  ucg.print("          keitsgrad in Modus 1 zum Ueben."); 
 }
 
 void show_mod3_start_display()
 {
-  ucg.setRotate270();
   //Überschrift
-  ucg.setFont(ucg_font_courB18_tr);
-  ucg.setPrintPos(80,25); 
+  ucg.setFont(ucg_font_ncenR18_tr);
+  ucg.setPrintPos(55,25); 
   ucg.setColor(118,181,197);
-  ucg.print("Mors-O-Mat");
+  ucg.print("Buchstaben lernen");
 
   //Unterstreichen 
   ucg.setColor(0, 0, 255, 255);
   ucg.setColor(1, 255, 255, 0);
   ucg.drawGradientLine(50, 40, 220, 0);
 
-  //Willkommen
-  ucg.setFont(ucg_font_ncenR14_tr);
-  ucg.setPrintPos(60,100); 
+  //Erklärung
+  ucg.setFont(ucg_font_ncenR10_tr);
+  ucg.setPrintPos(15,80); 
   ucg.setColor(255,255,255);
-  ucg.print("Herzlich Willkommen!"); 
-  //Modus
-  ucg.setPrintPos(40,130); 
-  ucg.setColor(255,255,255);
-  ucg.print("Was willst du heute lernen?");
+  ucg.print("Ich spiele gleich Buchstaben vor. Auf dem"); 
+  ucg.setPrintPos(15,100); 
+  ucg.print("Display siehst du dazu relevante Infos."); 
+  ucg.setPrintPos(15,120); 
+  ucg.print("Nach 3 Wiederholungen bist du dran! :)"); 
+  ucg.setPrintPos(15,140); 
+  ucg.print("Alles verstanden? Dann starte mit einem dit.");  
 
   //Unterstreichen 
   ucg.setColor(0, 0, 255, 255);
   ucg.setColor(1, 255, 255, 0);
-  ucg.drawGradientLine(50, 170, 220, 0);
+  ucg.drawGradientLine(50, 160, 220, 0);
 
-  //Anzeige der Modi 
+  //Tipp
   ucg.setFont(ucg_font_ncenR10_tr);
+  ucg.setColor(118,181,197); 
+  ucg.setPrintPos(10,200); 
+  ucg.print("Tipp: Du kennst schon alles, was ich");
   ucg.setPrintPos(10,220); 
-  ucg.setColor(255,255,255);
-  ucg.print("Buchstaben  --  Nehmen  --  Geben  --  Q-Code");
+  ucg.print("          vorspiele? Erhoehe die Schwierigkeit!"); 
 }
 
 
