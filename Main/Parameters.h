@@ -42,7 +42,10 @@ extern bool mod2;
 extern bool mod3;
 extern bool mod4;
 
+extern bool mod1_try_yourself;
+
 extern bool mod_changed;
+extern bool tone_enabled;
 
 extern bool paddle;
 

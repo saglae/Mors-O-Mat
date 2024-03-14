@@ -2,13 +2,15 @@
 #include "Ucglib.h"
 #include "Parameters.h"
 #include "Alphabet.h"
-#include "Display_Functions.h"
-#include "Buzzer_Functions.h"
 #include "Input.h"
 #include "Modus_1.h"
 #include "Modus_2.h"
 #include "Modus_3.h"
 #include "Modus_4.h"
+#include "Display_Functions.h"
+#include "Buzzer_Functions.h"
+
+
 
 
 
@@ -17,6 +19,8 @@
 void initialize_pins();
 
 int counter = 0; //32 Bit
+int counter_10s = 0;
+int8_t letter_counter = 0;
 int blinking_period = 0;
 
 
@@ -28,8 +32,8 @@ void setup() {
   ucg.begin(UCG_FONT_MODE_TRANSPARENT);
   ucg.clearScreen();
   clear_Structure();
-  //interrupts();
-  //timer_configuration();
+  interrupts();
+  timer_configuration();
   //Serial.begin(9600);
   
 
@@ -43,45 +47,66 @@ void loop() {
   {//Currently signals when a new word would start.
     blinking_period = current_dit_duration * 7 / 5;
   }
-
   if(mod_changed)
   {
     ucg.clearScreen();
   }
-
-  if(mod1)
-  {// Buchstaben lernen
-    show_mod1_start_display();
-    if(understood)
-    {
-      ucg.clearScreen();
-    }
-
+  if(difficulty_changed)
+  {
+    letter_counter = 0;
   }
+
+
+  if(mod1 && ! mod1_try_yourself)
+  {// Buchstaben lernen
+    ucg.clearScreen();
+    show_mod1_start_display();
+
+    Letter letter = all_Letters[(current_difficulty_level-1)*10+letter_counter];
+    show_letter(letter);
+
+    //Abspielen
+    playLetter(letter);
+    delay(1000);
+    playLetter(letter);
+    delay(1000);
+    playLetter(letter);
+    delay(1000);
+
+    write_to_lcd("Probier es selbst!",6,false);
+    mod1_try_yourself = true;
+    counter_10s = 0;
+    if((letter_counter + (current_difficulty_level-1)*10) >= 46)    //Unschöner Workaround! Clean Coding muss leider hier vernachlässigt werden, da ich mir keinen zusätzlichen Speicher leisten darf.
+    {
+      letter_counter = 0;
+    }
+    if(letter_counter >= 10)
+    { //Da wir nicht den Modus wechseln wollen.
+      letter_counter = 0;
+    }
+    else
+    {
+      letter_counter++;
+    }
+  }
+  else if(mod1 && mod1_try_yourself)
+  {
+    get_dit_action();
+  } 
+
+
 
   else if(mod2)
   { // Hörverstehen
     show_mod2_start_display();
-    if(understood)
-    {
-      ucg.clearScreen();
-    }
-
 
   }
-
-
   else if(mod3)
   { // Wörter geben
     show_mod3_start_display();
-    if(understood)
-    {
-      ucg.clearScreen();
-    }
+
 
   }
-
-
   else if(mod4)
   { // Q-Code
 
@@ -94,24 +119,6 @@ void loop() {
     //Willkommensbildschirm
     show_start_display();
   }
-
-
-
-  //show_settings();
-  //delay(1000);
-  //playLetter(A_M);
-  //playLetter(M_9);
-  //playLetter(B_M);
-  //get_dit_action();
-  //playLetter(M_M);
-  //playLetter(M_9);
-  //playLetter(T_M);
-  //play_Word(words_difficulty_1, 3);
-  //delay(2000);
-  
-  //show_Structure();
-  //show_interpreted_Structure();
-  
 
 }
 
@@ -149,7 +156,7 @@ void initialize_pins()
 
 
 
-/*void timer_configuration()
+void timer_configuration()
 {
   noInterrupts();
   TCCR1A = 0;               // Setzen Sie die Timer-Konfigurationsregister zurück
@@ -164,13 +171,13 @@ void initialize_pins()
 
   TIMSK1 |= (1 << OCIE1A);
   interrupts();   //Enable Interrupts globally
-}*/
+}
 
 
 //-------------------------ISR------------------------------------
 
 
-/*ISR(TIMER1_COMPA_vect)
+ISR(TIMER1_COMPA_vect)
 {
   //Wird alle 5 ms aufgerufen
   counter++;
@@ -179,5 +186,9 @@ void initialize_pins()
     digitalWrite(led_beat, !digitalRead(led_beat));
     counter = 0;
   }
-  
-}*/
+  counter_10s++;
+  if(counter_10s > 2000) //10s
+  {
+    mod1_try_yourself = false;
+  }  
+}

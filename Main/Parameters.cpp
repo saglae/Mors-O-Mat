@@ -14,7 +14,10 @@ bool mod2 = false;
 bool mod3 = false;
 bool mod4 = false;
 
+bool mod1_try_yourself = false;
+
 bool mod_changed = false;
+bool tone_enabled = false;
 
 bool paddle = false;
 

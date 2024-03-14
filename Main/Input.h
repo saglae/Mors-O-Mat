@@ -26,11 +26,11 @@ Letter check_if_Structure_is_Letter(const char* structure);
 
 
 extern int dit_pause_counter;
-extern char current_input_structure[20];   //Check for only ONE Structure at a time, then delete.
-extern char current_interpreted_input[20];
+extern char current_input_structure[10];   //Check for only ONE Structure at a time, then delete.
+extern char current_interpreted_input[10];
 
 
 extern bool speed_changed;
-extern bool understood;
+extern bool difficulty_changed;
 
 #endif

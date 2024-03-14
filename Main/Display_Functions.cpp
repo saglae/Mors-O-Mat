@@ -15,9 +15,19 @@ void write_to_lcd(const char* text, int row, bool clear)
 
 void show_letter(Letter x)
 {
-  write_to_lcd(x.definition,1,false);
-  lcd_spreadStructure(x.structure,2);
-  write_to_lcd(x.name,3,false);
+
+  write_to_lcd(x.definition,3,false);
+  lcd_spreadStructure(x.structure,4);
+  write_to_lcd(x.name,5,false);
+}
+
+void disguise_letter(Letter x)
+{
+  ucg.setColor(0,0,0);
+  write_to_lcd(x.definition,3,false);
+  lcd_spreadStructure(x.structure,4);
+  write_to_lcd(x.name,5,false);
+  ucg.setColor(255,255,255);
 }
 
 

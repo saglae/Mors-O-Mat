@@ -45,7 +45,7 @@ Letter M_1(".----","Eins","1",3);
 Letter M_2("..---","Zwei","2",4);
 Letter M_3("...--","Drei","3",4);
 Letter M_4("....-","Vier","4",3);
-Letter M_5(".....","Fünf","5",1);
+Letter M_5(".....","Fuenf","5",1);
 Letter M_6("-....","Sechs","6",3);
 Letter M_7("--...","Sieben","7",3);
 Letter M_8("---..","Acht","8",2);
@@ -59,17 +59,19 @@ Letter M_Error("..........","Irrung","Irrung",1);
 Letter M_Comma("--..--","Komma",",",4); 
 Letter M_Seperate("-...-","Trennungszeichen","--",2); 
 Letter M_Point(".-.-.-","Punkt",".",3); 
-Letter M_AE(".-.-","Ärger","Ä",5);  //Definitionen ausgedacht! 
-Letter M_OE("---.","Öfen","Ö",5); 
-Letter M_UE("..--","Übel","Ü",5);
+Letter M_AE(".-.-","Aerger","AE",5);  //Definitionen ausgedacht! 
+Letter M_OE("---.","Oefen","OE",5); 
+Letter M_UE("..--","Uebel","UE",5);
 Letter M_Bruchstrich("-..-.","Bruchstrich","/",5);
 
 
-Letter all_Letters[] = {A_M, B_M, C_M, D_M, E_M, F_M, G_M, H_M, I_M, J_M, K_M, 
-                        L_M, M_M, N_M, O_M, P_M, Q_M, R_M, S_M, T_M, U_M, V_M, 
-                        W_M, X_M, Y_M, Z_M, 
-                        M_1, M_2, M_3, M_4, M_5, M_6, M_7, M_8, M_9, M_0,
-                        M_Question_Mark, M_Start, M_End, M_Error, M_Comma, M_Seperate, M_Point, M_AE, M_OE, M_UE, M_Bruchstrich};
+
+Letter all_Letters[] = {E_M, S_M, N_M, O_M, M_Start, M_End, M_Error, T_M, Q_M, M_5,   //10
+                        R_M, U_M, M_9, M_Seperate, C_M, D_M, M_0, A_M, L_M, M_8,      //10
+                        I_M, X_M, M_4, M_Point, M_M, M_7, Y_M, M_1, H_M, M_6,         //10
+                        M_Question_Mark, J_M, M_3, G_M, M_2, V_M, K_M, M_Comma,       //8
+                        Z_M, F_M, B_M, P_M, W_M, M_Bruchstrich, M_AE, M_OE, M_UE};    //9
+
 
 int total_letters = 47;
 

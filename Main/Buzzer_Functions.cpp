@@ -5,6 +5,7 @@
 
 
 void playTone(int buzzerPin, int frequency, int duration, int volume) {  //duration in ms
+
   int period = 1000 / frequency;  // Berechne die Periode des Tons in us
   long cycles = duration / period;  // Berechne die Anzahl der Zyklen
 

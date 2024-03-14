@@ -41,9 +41,7 @@ bool interpret_modus_switch(int pin)
 }
 
 bool speed_changed = false;
-
-bool understood = false;
-
+bool difficulty_changed = false;
 
 void get_settings()
 {
@@ -64,12 +62,22 @@ void get_settings()
   else
   {
     mod_changed = true;
-    understood = false;
   }
+
+  int old_difficulty_level = current_difficulty_level;
 
   current_speed_level=interpret_potentiometer(speed);
   current_difficulty_level=interpret_potentiometer(difficulty);
   current_volume_level=interpret_potentiometer(volume);
+
+  if(old_difficulty_level == current_difficulty_level)
+  {
+    difficulty_changed = false;
+  }
+  else
+  {
+    difficulty_changed = true;
+  }
 
   old_dit_duration = current_dit_duration;
 
@@ -99,8 +107,8 @@ void get_settings()
 
 //------------------------------------------------------------Interpret Dits--------------------------------------
 
-char current_input_structure[20] = {};
-char current_interpreted_input[20] = {};
+char current_input_structure[10] = {};
+char current_interpreted_input[10] = {};
 
 
 int check_dits()
@@ -145,7 +153,7 @@ void get_dit_action()
     if(check_long_Pause_letter());
     {
       //New Letter
-      interpret_Structure();
+
     }
   }
   else if(action == 1)
@@ -193,7 +201,7 @@ void clear_Structure()
 
 void show_Structure()
 {
-  int row = 1; 
+  int row = 5; 
   lcd_spreadStructure(current_input_structure,row);
 }
 
