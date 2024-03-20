@@ -56,7 +56,6 @@ void loop() {
     letter_counter = 0;
   }
 
-
   if(mod1 && ! mod1_try_yourself)
   {// Buchstaben lernen
     learn_modus_1();

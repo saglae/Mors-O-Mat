@@ -9,9 +9,21 @@ void playTone(int buzzerPin, int frequency, int duration, int volume) {  //durat
   int period = 1000 / frequency;  // Berechne die Periode des Tons in us
   long cycles = duration / period;  // Berechne die Anzahl der Zyklen
 
-  analogWrite(buzzer,255);
+  int volume_output = 255;
+
+  switch (volume)
+  {
+      case 1: volume_output = 1; break;
+      case 2: volume_output = 4; break;
+      case 3: volume_output = 16; break;
+      case 4: volume_output = 128; break;
+      case 5: volume_output = 255; break;
+      default: volume_output = 255; break;
+  } 
+      
+      
   for (long i = 0; i < cycles; i++) {
-    digitalWrite(buzzerPin, HIGH);
+    analogWrite(buzzerPin, volume_output);
     delay(period / 2);
     digitalWrite(buzzerPin, LOW);
     delay(period / 2);
