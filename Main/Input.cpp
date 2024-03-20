@@ -131,19 +131,8 @@ int check_dits()
 }
 
 
-bool check_long_Pause_letter()
-{
-  if(dit_pause_counter==3)
-  {
-    dit_pause_counter = 0;
-    return true;
-  }
-  else
-  {
-    return false;
-  }
-}
-
+bool word_is_ready = false;
+bool letter_is_ready = false;
 
 void get_dit_action()
 {
@@ -154,11 +143,20 @@ void get_dit_action()
   { //Pause
     dit_pause_counter++;
     delay(current_dit_duration);
-    if(check_long_Pause_letter());
+    if(dit_pause_counter == 3)
     {
-      //New Letter
-
+      //New Letter --> Write Letter to Word-Buffer
+      char letter = interpret_Structure();
+      append_letter_to_structure(letter);
+      letter_is_ready = true;
     }
+    else if(dit_pause_counter == 7)
+    {
+      //New Word --> Write Letter to Word-Buffer and set Flag
+      char letter = interpret_Structure();
+      append_letter_to_structure(letter);
+      word_is_ready = true;
+    };
   }
   else if(action == 1)
   { // Dit
@@ -176,11 +174,32 @@ void get_dit_action()
 
 }
 
+void append_letter_to_structure(char toAppend)
+{
+  int index = 0; 
+  while (current_interpreted_input[index] != '\0') 
+  {
+    index++;
+  }
+
+    if(index<10)
+    {
+      current_input_structure[index+1] = toAppend;
+    }
+    else
+    { 
+      for(int i = 0; i < 10; i++)
+      {
+        current_input_structure[i] = '\0';
+      }
+      current_input_structure[0] = toAppend;
+    }
+}
 
 void append_Structure(char toAppend) 
 {
     int index = get_current_structure_lenght();
-    if(index<20)
+    if(index<10)
     {
       current_input_structure[index+1] = toAppend;
     }
@@ -211,7 +230,7 @@ void show_Structure()
 
 
 
-const char* interpret_Structure()
+char interpret_Structure()
 {
   int lenght = get_current_structure_lenght();
   char structure[lenght + 1] = {};   // + \0 
@@ -220,6 +239,7 @@ const char* interpret_Structure()
   {
     structure[i] = current_input_structure[i];
   }
+  structure[lenght] = '\0';
 
   Letter found_letter = check_if_Structure_is_Letter(structure);
   clear_Structure();
