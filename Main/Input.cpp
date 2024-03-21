@@ -163,12 +163,16 @@ void get_dit_action()
     playTone(buzzer,440,current_dit_duration,current_volume_level);
     append_Structure('.');
     dit_pause_counter = 0;
+    letter_is_ready = false;
+    word_is_ready = false;
   }
   else if(action == 2)
   { //Dah
     playTone(buzzer,440,current_dit_duration*3,current_volume_level);
     append_Structure('-');
     dit_pause_counter = 0;
+    letter_is_ready = false;
+    word_is_ready = false;
   }
   delay(current_dit_duration);
 
@@ -190,7 +194,7 @@ void append_letter_to_structure(char toAppend)
     { 
       for(int i = 0; i < 10; i++)
       {
-        current_input_structure[i] = '\0';
+        current_input_structure[i] = '\0';  //Löschen
       }
       current_input_structure[0] = toAppend;
     }

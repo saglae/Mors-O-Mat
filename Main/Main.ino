@@ -24,6 +24,7 @@ Letter current_word_to_play[5];
 
 int8_t counter_mod3 = 0;
 int pseudo_random = 0;
+bool mod3_send = false;
 
 
 void setup() {
@@ -44,7 +45,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  write_to_lcd(set_process(3), 5);    //Buggy
   get_settings();
   if(speed_changed)
   {//Currently signals when a new word would start.
@@ -74,34 +75,42 @@ void loop() {
 
   else if(mod3)
   { // Wörter geben
+    ucg.clearScreen();
     show_mod3_start_display();
-    if(true) //init_mod3
-    {
-      static Letter word[5];
-      char word_to_display[6]; //+ delimiter
-      char progress[6];
 
-      for(int letter = 0; letter < 5; letter++)
-      {
+    static Letter word[5];
+    char word_to_display[6];  //+ delimiter
+    char progress[6];
+
+    for (int letter = 0; letter < 5; letter++) {
         int randomNumber = generate_random();
         word[letter] = all_Letters[randomNumber];
         word_to_display[letter] = all_Letters[randomNumber].name[0];
         progress[letter] = '\0';
-      }
-      word_to_display[5] = '\0'; //Delimiter dran
-      progress[5] = '\0';
-
-      write_to_lcd("Start >> dit",2,false);
-      letter_is_ready = false;
-      write_to_lcd(progress,3,false);
-      write_to_lcd(word_to_display, 4, false);
-
-      while(analogRead(dot)<500) {};
     }
-    
-    
-    //Write corrected word!
+    word_to_display[5] = '\0';  //Delimiter dran
+    progress[5] = '\0';
 
+    write_to_lcd("Start >> dit", 2, false);
+    mod3_send = true;
+    letter_is_ready = false;
+    write_to_lcd(progress, 3, false);
+    write_to_lcd(word_to_display, 4, false);
+
+    while (analogRead(dot) < 500) {};
+
+    //Prozes: Buchstabe 1
+    write_to_lcd(set_process(3), 3);    //Buggy
+
+
+    while(!word_is_ready)
+    {
+      get_dit_action();
+      write_to_lcd(current_interpreted_input,5,false);
+    }
+
+    write_to_lcd("Weiter >> dit", 7, false);
+    while(analogRead(dot) < 500) {};
   }
   else if(mod4)
   { // Q-Code
@@ -118,6 +127,23 @@ void loop() {
 
 }
 
+
+char* set_process(int current_letter_index) //Achtung! Index ist inklusive 0!
+{
+  char result[6];
+  for(int index = 0; index < 6; index++)
+  {
+    if(index <= current_letter_index)
+    {
+      result[index] = "v";
+    }
+    else
+    {
+      result[index] = '\0';
+    }
+  }
+  return result;
+}
 
 void learn_modus_1()
 {

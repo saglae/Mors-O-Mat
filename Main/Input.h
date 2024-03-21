@@ -33,7 +33,7 @@ extern char current_interpreted_input[10];
 
 extern bool speed_changed;
 extern bool difficulty_changed;
-extern bool words_is_ready;
+extern bool word_is_ready;
 extern bool letter_is_ready;
 
 #endif
